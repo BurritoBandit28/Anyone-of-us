@@ -282,8 +282,5 @@
 				}
 			]
 		}
-	],
-  "overides" : [
-    {"predicate": {"backstab": 1}, "model": "item/knifestab"}
-  ]
+	]
 }
