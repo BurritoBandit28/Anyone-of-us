@@ -13,7 +13,7 @@ public class ItemRegister {
 		Registry.register(Registry.ITEM, AnyoneOfUs.ID("knife"), ModItems.KNIFE);
 
 
-		Registry.register(Registry.ITEM, AnyoneOfUs.ID("cloaking_device"), ModItems.CLOAKING_DEVICE);
+		Registry.register(Registry.ITEM, AnyoneOfUs.ID("invisiwatch"), ModItems.CLOAKING_DEVICE);
 
 	}
 

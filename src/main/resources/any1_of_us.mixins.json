@@ -7,10 +7,11 @@
     "LivingEntityMixin"
   ],
   "client": [
-    "ItemRendererMixin",
-    "PlayerEntityRendererMixin"
+    "ArmorFeatureRendererMixin",
+    "PlayerEntityRendererMixin",
+    "PlayerHeldItemFeatureRendererMixin"
   ],
   "injectors": {
     "defaultRequire": 1
-	}
+  }
 }
