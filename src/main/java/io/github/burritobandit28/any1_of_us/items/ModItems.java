@@ -8,7 +8,7 @@ import net.minecraft.item.ToolMaterials;
 public class ModItems {
 
 
-	public static final SwordItem KNIFE = new SwordItem(ToolMaterials.IRON, 3, 100, new Item.Settings()
+	public static final Item KNIFE = new KnifeItem(ToolMaterials.IRON, 3, new Item.Settings()
 			.group(AnyoneOfUs.FRENCH_TAB));
 
 	public static final Item CLOAKING_DEVICE = new CloakingDeviceItem(new Item.Settings()

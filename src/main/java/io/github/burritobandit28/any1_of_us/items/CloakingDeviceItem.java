@@ -1,6 +1,7 @@
 package io.github.burritobandit28.any1_of_us.items;
 
 import io.github.burritobandit28.any1_of_us.effects.CloakedStatusEffect;
+import io.github.burritobandit28.any1_of_us.sounds.SoundEvents;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.player.PlayerEntity;
@@ -10,6 +11,7 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.nbt.NbtHelper;
+import net.minecraft.sound.SoundCategory;
 import net.minecraft.util.Hand;
 import net.minecraft.util.TypedActionResult;
 import net.minecraft.util.Util;
@@ -34,7 +36,7 @@ public class CloakingDeviceItem extends Item {
 
 		nbt.putInt("Active", 0);
 
-		getDefaultStack().setNbt(nbt);
+		getDefaultStack().writeNbt(nbt);
 
 	}
 
@@ -59,6 +61,8 @@ public class CloakingDeviceItem extends Item {
 				nbt.putInt("Active", 1);
 
 				itemStack.writeNbt(nbt);
+
+				user.playSound(SoundEvents.INVISIWATCH_ON, SoundCategory.PLAYERS, 1.0f, 1.0f);
 
 			}
 			else  {
@@ -85,6 +89,8 @@ public class CloakingDeviceItem extends Item {
 				nbt.putInt("Active", 0);
 
 				itemStack.writeNbt(nbt);
+
+				user.playSound(SoundEvents.INVISIWATCH_OFF, SoundCategory.PLAYERS, 1.0f, 1.0f);
 
 			}
 		}

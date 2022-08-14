@@ -8,6 +8,7 @@
   ],
   "client": [
     "ArmorFeatureRendererMixin",
+    "PlayerEntityMixin",
     "PlayerEntityRendererMixin",
     "PlayerHeldItemFeatureRendererMixin"
   ],

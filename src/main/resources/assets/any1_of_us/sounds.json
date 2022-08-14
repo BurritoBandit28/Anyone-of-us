@@ -1,0 +1,16 @@
+{
+  "invisiwatch.on": {
+    "catagory": "players",
+    "sounds": [
+      "any1_of_us:invisiwatch/on"
+    ],
+    "subtitle": "invisiwatch.on"
+  },
+  "invisiwatch.off": {
+    "catagory": "players",
+    "sounds": [
+      "any1_of_us:invisiwatch/off"
+    ],
+    "subtitle": "invisiwatch.off"
+  }
+}
