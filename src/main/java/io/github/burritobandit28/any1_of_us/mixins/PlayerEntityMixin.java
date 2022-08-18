@@ -9,6 +9,7 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.hit.EntityHitResult;
@@ -16,12 +17,16 @@ import net.minecraft.util.hit.HitResult;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(PlayerEntity.class)
 public abstract class PlayerEntityMixin extends LivingEntity {
+
+	@Shadow
+	public float strideDistance;
 
 	protected PlayerEntityMixin(EntityType<? extends LivingEntity> entityType, World world) {
 		super(entityType, world);
@@ -36,32 +41,23 @@ public abstract class PlayerEntityMixin extends LivingEntity {
 		MinecraftClient client = MinecraftClient.getInstance();
 		HitResult hit = client.crosshairTarget;
 
-		assert hit != null;
-		if (hit.getType() == HitResult.Type.ENTITY) {
+		ItemStack stack =  this.getStackInHand(this.getActiveHand());
+
+
+		if (hit.getType() == HitResult.Type.ENTITY && hit.getType() != null) {
 			EntityHitResult entityHit = (EntityHitResult) hit;
 			Entity entity = entityHit.getEntity();
 
-			if (AnyoneOfUs.isStabable(entity.getYaw(), this.getYaw()) && this.getStackInHand(this.getActiveHand()).getItem() instanceof KnifeItem && entity != this) {
-
-				NbtCompound nbt = this.getStackInHand(this.getActiveHand()).getOrCreateNbt();
-
-				nbt.putInt("Backstab", 1);
-
-				this.getStackInHand(this.getActiveHand()).setNbt(nbt);
-
-				//System.out.println("back");
-
+			if (AnyoneOfUs.isStabable(entity.getYaw(), this.getYaw()) && this.getStackInHand(this.getActiveHand()).getItem() instanceof KnifeItem) {
+				KnifeItem item =(KnifeItem) this.getStackInHand(this.getActiveHand()).getItem();
+				item.setBackStab(true, stack);
 			}
-			else if (!AnyoneOfUs.isStabable(entity.getYaw(), this.getYaw()) && this.getStackInHand(this.getActiveHand()).getItem() instanceof KnifeItem) {
-
-				NbtCompound nbt = this.getStackInHand(this.getActiveHand()).getOrCreateNbt();
-
-				nbt.putInt("Backstab", 0);
-
-				this.getStackInHand(this.getActiveHand()).setNbt(nbt);
-
+		}
+		else {
+			if (this.getStackInHand(this.getActiveHand()).getItem() instanceof KnifeItem) {
+				KnifeItem item = (KnifeItem) this.getStackInHand(this.getActiveHand()).getItem();
+				item.setBackStab(false, stack);
 			}
-
 		}
 
 	}

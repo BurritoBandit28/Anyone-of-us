@@ -9,11 +9,13 @@ public class SoundEvents {
 
 	public static  SoundEvent INVISIWATCH_ON;
 	public static  SoundEvent INVISIWATCH_OFF;
+	public static  SoundEvent CRIT;
 
 	public static void registerSoundEvents() {
 
 		INVISIWATCH_ON = register("invisiwatch.on");
 		INVISIWATCH_OFF = register("invisiwatch.off");
+		CRIT = register("crit");
 
 	}
 

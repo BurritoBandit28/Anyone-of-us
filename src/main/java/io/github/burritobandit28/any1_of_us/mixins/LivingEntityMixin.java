@@ -1,8 +1,12 @@
 package io.github.burritobandit28.any1_of_us.mixins;
 
 import io.github.burritobandit28.any1_of_us.effects.CloakedStatusEffect;
+import io.github.burritobandit28.any1_of_us.items.KnifeItem;
 import io.github.burritobandit28.any1_of_us.items.ModItems;
+import io.github.burritobandit28.any1_of_us.sounds.SoundEvents;
+import net.minecraft.advancement.Advancement;
 import net.minecraft.client.render.entity.PlayerEntityRenderer;
+import net.minecraft.data.server.AdvancementsProvider;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
@@ -10,6 +14,8 @@ import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.entity.effect.StatusEffect;
 import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.item.ItemStack;
+import net.minecraft.sound.SoundCategory;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
 import org.spongepowered.asm.mixin.Final;
@@ -38,26 +44,43 @@ public abstract class LivingEntityMixin extends Entity {
 	public abstract boolean hasStatusEffect(StatusEffect effect);
 
 	@Shadow
-	public abstract void kill();
+	public abstract float getHealth();
+
+	@Shadow
+	public abstract void setHealth(float health);
+
+	@Shadow
+	public float knockbackVelocity;
 
 	@Inject(at = @At("TAIL"), method = "updatePotionVisibility")
 	public void cloakingInvis(CallbackInfo ci) {
 		this.setInvisible(this.hasStatusEffect(CloakedStatusEffect.CLOAKED));
 	}
 
-	@Inject(at = @At("HEAD"), method = "damage", cancellable = true)
-	public void doBackStabStuff(DamageSource source, float amount, CallbackInfoReturnable<Boolean> cir) {
+	@Inject(at = @At("RETURN"), method = "applyDamage", cancellable = true)
+	public void doBackStabStuff(DamageSource source, float amount, CallbackInfo ci) {
+
+
 		if(source.getAttacker() instanceof PlayerEntity) {
+
 			PlayerEntity ThatSteveIsASpy = (PlayerEntity) source.getAttacker();
-			if(ThatSteveIsASpy.getStackInHand(ThatSteveIsASpy.getActiveHand()).getItem() == ModItems.KNIFE && Objects.requireNonNull(ThatSteveIsASpy.getStackInHand(ThatSteveIsASpy.getActiveHand()).getNbt()).getInt("Backstab") == 1) {
 
-				//epic debug lines
-				System.out.println("aaaaaaaaaaaaaa");
-				System.out.println(this.getName());
+			ItemStack itemStack = ThatSteveIsASpy.getStackInHand(ThatSteveIsASpy.getActiveHand());
 
-				this.setVelocity(this.getRotationVector().x * 100, this.getRotationVector().y * 100, this.getRotationVector().z *100);
-				this.kill();
-				cir.setReturnValue(true);
+			if(itemStack.getItem() == ModItems.KNIFE) {
+				KnifeItem knifeItem = (KnifeItem) ThatSteveIsASpy.getStackInHand(ThatSteveIsASpy.getActiveHand()).getItem();
+				if (knifeItem.isBackStab()) {
+
+					amount = 300;
+
+					System.out.println("hello");
+
+					float h = this.getHealth();
+					this.setHealth(h - amount);
+					this.playSound(SoundEvents.CRIT,0.4f, 1.0f);
+
+					ci.cancel();
+				}
 			}
 		}
 	}

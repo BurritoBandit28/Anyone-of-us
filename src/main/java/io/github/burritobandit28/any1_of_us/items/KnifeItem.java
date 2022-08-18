@@ -22,6 +22,8 @@ public class KnifeItem extends ToolItem {
 
 	private double attackDamage;
 
+	private boolean isBackStab;
+
 	private Multimap<EntityAttribute, EntityAttributeModifier> attributeModifiers;
 
 	public KnifeItem(ToolMaterial toolMaterial, int damage, Settings settings) {
@@ -44,6 +46,31 @@ public class KnifeItem extends ToolItem {
 	@Override
 	public Multimap<EntityAttribute, EntityAttributeModifier> getAttributeModifiers(EquipmentSlot slot) {
 		return slot == EquipmentSlot.MAINHAND ? this.attributeModifiers : super.getAttributeModifiers(slot);
+	}
+
+	public void setBackStab(boolean isBackStab, ItemStack stack){
+		this.isBackStab = isBackStab;
+
+		if (this.isBackStab) {
+			NbtCompound nbt = stack.getOrCreateNbt();
+
+			nbt.putInt("Backstab", 1);
+
+			stack.setNbt(nbt);
+		}
+
+		else {
+			NbtCompound nbt = stack.getOrCreateNbt();
+
+			nbt.putInt("Backstab", 0);
+
+			stack.setNbt(nbt);
+		}
+
+	}
+
+	public boolean isBackStab() {
+		return this.isBackStab;
 	}
 
 

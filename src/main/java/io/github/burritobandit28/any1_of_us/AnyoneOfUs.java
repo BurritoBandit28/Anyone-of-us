@@ -5,6 +5,7 @@ import io.github.burritobandit28.any1_of_us.items.ItemRegister;
 import io.github.burritobandit28.any1_of_us.items.ModItems;
 import io.github.burritobandit28.any1_of_us.sounds.SoundEvents;
 import net.fabricmc.fabric.api.client.itemgroup.FabricItemGroupBuilder;
+import net.fabricmc.fabric.api.datagen.v1.provider.FabricAdvancementProvider;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.Identifier;
@@ -39,5 +40,6 @@ public class AnyoneOfUs implements ModInitializer {
 		ItemRegister.registerItems();
 		CloakedStatusEffect.register();
 		SoundEvents.registerSoundEvents();
+
 	}
 }
