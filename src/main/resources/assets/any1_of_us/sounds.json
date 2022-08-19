@@ -21,5 +21,46 @@
       "any1_of_us:crit/crit_received3"
     ],
     "subtitle": "crit"
+  },
+  "spy_hurt": {
+    "catagory": "players",
+    "sounds": [
+      "any1_of_us:spy/hurt/spy_painsharp01",
+      "any1_of_us:spy/hurt/spy_painsharp02",
+      "any1_of_us:spy/hurt/spy_painsharp03",
+      "any1_of_us:spy/hurt/spy_painsharp04"
+    ],
+    "subtitle": "spy.hurt"
+  },
+  "spy_hurt_fire": {
+    "catagory": "players",
+    "sounds": [
+      "any1_of_us:spy/fire/fire_hurt1",
+      "any1_of_us:spy/fire/fire_hurt2",
+      "any1_of_us:spy/fire/fire_hurt3"
+    ],
+    "subtitle": "spy.hurt.fire"
+  },
+  "spy_hurt_crit": {
+    "catagory": "players",
+    "sounds": [
+      "any1_of_us:spy/crit/spy_painsevere01",
+      "any1_of_us:spy/crit/spy_painsevere02",
+      "any1_of_us:spy/crit/spy_painsevere03",
+      "any1_of_us:spy/crit/spy_painsevere04",
+      "any1_of_us:spy/crit/spy_painsevere05"
+    ],
+    "subtitle": "spy.hurt.crit"
+  },
+  "spy_hurt_death": {
+    "catagory": "players",
+    "sounds": [
+      "any1_of_us:spy/death/spy_paincriticaldeath01",
+      "any1_of_us:spy/death/spy_paincriticaldeath02",
+      "any1_of_us:spy/death/spy_paincriticaldeath03"
+
+    ],
+    "subtitle": "spy.hurt.death"
   }
+
 }

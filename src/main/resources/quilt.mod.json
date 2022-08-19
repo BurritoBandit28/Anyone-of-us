@@ -18,7 +18,8 @@
 		},
 		"intermediate_mappings": "net.fabricmc:intermediary",
 		"entrypoints": {
-			"init": "io.github.burritobandit28.any1_of_us.AnyoneOfUs"
+			"init": "io.github.burritobandit28.any1_of_us.AnyoneOfUs",
+			"client_init": "io.github.burritobandit28.any1_of_us.AnyoneOfUsClient"
 		},
 		"depends": [
 			{

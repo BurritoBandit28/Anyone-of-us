@@ -4,11 +4,12 @@
   "package": "io.github.burritobandit28.any1_of_us.mixins",
   "compatibilityLevel": "JAVA_17",
   "mixins": [
-    "LivingEntityMixin",
-    "PlayerEntityMixin"
+    "AlsoPlayerEntityMixin",
+    "LivingEntityMixin"
   ],
   "client": [
     "ArmorFeatureRendererMixin",
+    "PlayerEntityMixin",
     "PlayerEntityRendererMixin",
     "PlayerHeldItemFeatureRendererMixin"
   ],

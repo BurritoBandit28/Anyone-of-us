@@ -1,5 +1,6 @@
 package io.github.burritobandit28.any1_of_us;
 
+import io.github.burritobandit28.any1_of_us.armor.FrenchAttribute;
 import io.github.burritobandit28.any1_of_us.effects.CloakedStatusEffect;
 import io.github.burritobandit28.any1_of_us.items.ItemRegister;
 import io.github.burritobandit28.any1_of_us.items.ModItems;
@@ -13,10 +14,13 @@ import org.quiltmc.loader.api.ModContainer;
 import org.quiltmc.qsl.base.api.entrypoint.ModInitializer;
 import org.quiltmc.qsl.item.group.api.QuiltItemGroup;
 
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class AnyoneOfUs implements ModInitializer {
+
+	public static ArrayList<String> shouldBeInvis = new ArrayList<>();
 
 	public static final String MOD_ID = "any1_of_us";
 
@@ -37,6 +41,7 @@ public class AnyoneOfUs implements ModInitializer {
 	@Override
 	public void onInitialize(ModContainer mod) {
 		LOGGER.info("Hellooo from anyone of us mod :)");
+		FrenchAttribute.registerAttributes();
 		ItemRegister.registerItems();
 		CloakedStatusEffect.register();
 		SoundEvents.registerSoundEvents();

@@ -1,16 +1,22 @@
 package io.github.burritobandit28.any1_of_us.mixins;
 
 import io.github.burritobandit28.any1_of_us.AnyoneOfUs;
+import io.github.burritobandit28.any1_of_us.armor.FrenchAttribute;
 import io.github.burritobandit28.any1_of_us.items.KnifeItem;
+import io.github.burritobandit28.any1_of_us.items.SuitArmorItem;
+import io.github.burritobandit28.any1_of_us.sounds.SoundEvents;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NbtCompound;
+import net.minecraft.server.network.ServerPlayerEntity;
+import net.minecraft.sound.SoundEvent;
 import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.hit.EntityHitResult;
 import net.minecraft.util.hit.HitResult;
@@ -21,12 +27,16 @@ import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(PlayerEntity.class)
 public abstract class PlayerEntityMixin extends LivingEntity {
 
 	@Shadow
 	public float strideDistance;
+
+	@Shadow
+	public abstract Iterable<ItemStack> getArmorItems();
 
 	protected PlayerEntityMixin(EntityType<? extends LivingEntity> entityType, World world) {
 		super(entityType, world);
@@ -37,6 +47,7 @@ public abstract class PlayerEntityMixin extends LivingEntity {
 		if (!this.world.isClient) {
 			return;
 		}
+
 
 		MinecraftClient client = MinecraftClient.getInstance();
 		HitResult hit = client.crosshairTarget;
@@ -59,9 +70,5 @@ public abstract class PlayerEntityMixin extends LivingEntity {
 				item.setBackStab(false, stack);
 			}
 		}
-
 	}
-
-
-
 }

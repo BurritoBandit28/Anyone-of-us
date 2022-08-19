@@ -1,5 +1,6 @@
 package io.github.burritobandit28.any1_of_us.mixins;
 
+import io.github.burritobandit28.any1_of_us.AnyoneOfUs;
 import io.github.burritobandit28.any1_of_us.effects.CloakedStatusEffect;
 import io.github.burritobandit28.any1_of_us.items.KnifeItem;
 import io.github.burritobandit28.any1_of_us.items.ModItems;
@@ -15,9 +16,15 @@ import net.minecraft.entity.effect.StatusEffect;
 import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
+import net.minecraft.network.PacketByteBuf;
+import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
+import org.quiltmc.loader.api.QuiltLoader;
+import org.quiltmc.qsl.networking.api.PacketByteBufs;
+import org.quiltmc.qsl.networking.api.PlayerLookup;
+import org.quiltmc.qsl.networking.api.ServerPlayNetworking;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -32,10 +39,6 @@ import java.util.Objects;
 @Mixin(LivingEntity.class)
 public abstract class LivingEntityMixin extends Entity {
 
-	@Shadow
-	@Final
-	private Map<StatusEffect, StatusEffectInstance> activeStatusEffects;
-
 	public LivingEntityMixin(EntityType<?> entityType, World world) {
 		super(entityType, world);
 	}
@@ -49,12 +52,27 @@ public abstract class LivingEntityMixin extends Entity {
 	@Shadow
 	public abstract void setHealth(float health);
 
-	@Shadow
-	public float knockbackVelocity;
 
 	@Inject(at = @At("TAIL"), method = "updatePotionVisibility")
 	public void cloakingInvis(CallbackInfo ci) {
 		this.setInvisible(this.hasStatusEffect(CloakedStatusEffect.CLOAKED));
+		if ((LivingEntity)(Object)this instanceof PlayerEntity) {
+
+			PlayerEntity user = (PlayerEntity) (LivingEntity)(Object)this;
+
+			PacketByteBuf buf = PacketByteBufs.create();
+
+			buf.writeBoolean(this.hasStatusEffect(CloakedStatusEffect.CLOAKED));
+			buf.writeString(this.getEntityName());
+
+			for (ServerPlayerEntity player : PlayerLookup.tracking(this)) {
+				ServerPlayNetworking.send(player, AnyoneOfUs.ID("cloaked_packet"), buf);
+			}
+			ServerPlayNetworking.send( (ServerPlayerEntity) user, AnyoneOfUs.ID("cloaked_packet"), buf);
+		}
+
+
+
 	}
 
 	@Inject(at = @At("RETURN"), method = "applyDamage", cancellable = true)
@@ -84,6 +102,8 @@ public abstract class LivingEntityMixin extends Entity {
 			}
 		}
 	}
+
+
 
 
 

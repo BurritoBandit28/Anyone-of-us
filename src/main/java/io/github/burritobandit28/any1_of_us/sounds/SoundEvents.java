@@ -10,12 +10,20 @@ public class SoundEvents {
 	public static  SoundEvent INVISIWATCH_ON;
 	public static  SoundEvent INVISIWATCH_OFF;
 	public static  SoundEvent CRIT;
+	public static SoundEvent SPY_HURT;
+	public static SoundEvent SPY_HURT_CRIT;
+	public static SoundEvent SPY_HURT_DEATH;
+	public static SoundEvent SPY_HURT_FIRE;
 
 	public static void registerSoundEvents() {
 
 		INVISIWATCH_ON = register("invisiwatch.on");
 		INVISIWATCH_OFF = register("invisiwatch.off");
 		CRIT = register("crit");
+		SPY_HURT = register("spy_hurt");
+		SPY_HURT_CRIT = register("spy_hurt_crit");
+		SPY_HURT_DEATH = register("spy_hurt_death");
+		SPY_HURT_FIRE = register("spy_hurt_fire");
 
 	}
 
