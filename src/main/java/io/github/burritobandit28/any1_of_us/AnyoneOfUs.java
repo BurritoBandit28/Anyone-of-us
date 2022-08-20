@@ -3,19 +3,24 @@ package io.github.burritobandit28.any1_of_us;
 import io.github.burritobandit28.any1_of_us.armor.FrenchAttribute;
 import io.github.burritobandit28.any1_of_us.effects.CloakedStatusEffect;
 import io.github.burritobandit28.any1_of_us.items.ItemRegister;
+import io.github.burritobandit28.any1_of_us.items.KnifeItem;
 import io.github.burritobandit28.any1_of_us.items.ModItems;
 import io.github.burritobandit28.any1_of_us.sounds.SoundEvents;
-import net.fabricmc.fabric.api.client.itemgroup.FabricItemGroupBuilder;
-import net.fabricmc.fabric.api.datagen.v1.provider.FabricAdvancementProvider;
-import net.minecraft.item.ItemGroup;
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
+import net.minecraft.network.PacketByteBuf;
+import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.util.Identifier;
+import org.apache.commons.lang3.Range;
 import org.quiltmc.loader.api.ModContainer;
 import org.quiltmc.qsl.base.api.entrypoint.ModInitializer;
 import org.quiltmc.qsl.item.group.api.QuiltItemGroup;
+import org.quiltmc.qsl.networking.api.PacketByteBufs;
+import org.quiltmc.qsl.networking.api.PlayerLookup;
+import org.quiltmc.qsl.networking.api.ServerPlayNetworking;
 
 import java.util.ArrayList;
-import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class AnyoneOfUs implements ModInitializer {
@@ -34,8 +39,30 @@ public class AnyoneOfUs implements ModInitializer {
 			.icon(() -> new ItemStack(ModItems.KNIFE))
 			.build();
 
-	public static boolean isStabable(float yaw1, float yaw2) {
-		return (yaw1 > (yaw2 -10) && yaw1 < (yaw2 + 10));
+	public static boolean isStabable(Entity spy, Entity target) {
+
+		float yaw1 = spy.getYaw();
+		float yaw2 = target.getYaw();
+		float upper = yaw2 + 25.0f;
+		float lower = yaw2 - 25.0f;
+
+		Range<Float> range = Range.between(correct(lower), correct(upper));
+
+		return range.contains(yaw1);
+	}
+
+	public static float correct(float initial) {
+		float finalVal = initial;
+
+		if (finalVal >179.9) {
+			finalVal = (finalVal -180) - ((finalVal -180) *2);
+		}
+		else if (finalVal < -180) {
+			finalVal = 180 - ((0.0f - finalVal ) - 180);
+		}
+		if (finalVal == -180) finalVal = 180;
+
+		return finalVal;
 	}
 
 	@Override
@@ -46,5 +73,24 @@ public class AnyoneOfUs implements ModInitializer {
 		CloakedStatusEffect.register();
 		SoundEvents.registerSoundEvents();
 
+		ServerPlayNetworking.registerGlobalReceiver(ID("backstab_packet"), ((server, serverPlayerEntity, serverPlayNetworkHandler, buf, responseSender) -> {
+			boolean backstab = buf.readBoolean();
+			PlayerEntity player = server.getPlayerManager().getPlayer(buf.readString());
+
+			assert player != null;
+			ItemStack stack = player.getMainHandStack();
+			KnifeItem item = (KnifeItem) stack.getItem();
+			item.setBackStab(backstab, stack);
+
+			PacketByteBuf buf2 = PacketByteBufs.create();
+
+			buf2.writeBoolean(backstab);
+			buf2.writeString(player.getEntityName());
+
+			for (ServerPlayerEntity ignored : PlayerLookup.tracking(player)) {
+				ServerPlayNetworking.send((ServerPlayerEntity) player, AnyoneOfUs.ID("cloaked_packet"), buf2);
+			}
+
+		}));
 	}
 }

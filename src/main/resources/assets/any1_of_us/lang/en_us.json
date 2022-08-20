@@ -1,4 +1,24 @@
 {
   "any1_of_us.advancement.backstab.title" : "Dime-a-dozen Scumbag",
-  "any1_of_us.advancement.backstab.description": "Kill another mercenary with a backstab"
+  "any1_of_us.advancement.backstab.description": "Kill another mercenary with a backstab",
+  "itemGroup.any1_of_us.frenchtab" : "Any one of us",
+  "item.any1_of_us.knife" : "Knife",
+  "item.any1_of_us.invisiwatch" : "Invisiwatch",
+  "item.any1_of_us.red_balaclava" : "Red Balaclava",
+  "item.any1_of_us.red_suit_jacket" : "Red Suit Jacket",
+  "item.any1_of_us.red_suit_trousers" : "Red Suit Pants",
+  "item.any1_of_us.red_shoes" : "Blu Shoes",
+  "item.any1_of_us.blu_balaclava" : "Blu Balaclava",
+  "item.any1_of_us.blu_suit_jacket" : "Blu Suit Jacket",
+  "item.any1_of_us.blu_suit_trousers" : "Blu Suit Pants",
+  "item.any1_of_us.blu_shoes" : "Blu Shoes",
+  "invisiwatch.on" : "Invisiwatch activates",
+  "invisiwatch.off" : "Invisiwatch deactivates",
+  "crit" : "Idiot gets trickstabbed",
+  "spy.hurt" : " A Spy is hurt",
+  "spy.hurt.fire" :"A spy appears to be on fire",
+  "spy.hurt.crit" : "A Spy is badly hurt",
+  "spy.hurt.death" : "A Spy passes away (RIP)",
+  "spy.hurt.fall" : "A Spy breaks his f***ing legs",
+  "attributes.name.generic.french" : "French-iness (out of 100)"
 }

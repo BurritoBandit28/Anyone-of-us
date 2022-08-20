@@ -37,7 +37,13 @@
     "sounds": [
       "any1_of_us:spy/fire/fire_hurt1",
       "any1_of_us:spy/fire/fire_hurt2",
-      "any1_of_us:spy/fire/fire_hurt3"
+      "any1_of_us:spy/fire/fire_hurt3",
+      "any1_of_us:spy/fire/fire_hurt4",
+      "any1_of_us:spy/fire/fire_hurt5",
+      "any1_of_us:spy/fire/fire_hurt6",
+      "any1_of_us:spy/fire/fire_hurt7",
+      "any1_of_us:spy/fire/fire_hurt8",
+      "any1_of_us:spy/fire/fire_hurt9"
     ],
     "subtitle": "spy.hurt.fire"
   },
@@ -55,12 +61,23 @@
   "spy_hurt_death": {
     "catagory": "players",
     "sounds": [
-      "any1_of_us:spy/death/spy_paincriticaldeath01",
-      "any1_of_us:spy/death/spy_paincriticaldeath02",
-      "any1_of_us:spy/death/spy_paincriticaldeath03"
+      "any1_of_us:spy/death/spy_paincrticialdeath01",
+      "any1_of_us:spy/death/spy_paincrticialdeath02",
+      "any1_of_us:spy/death/spy_paincrticialdeath03"
 
     ],
     "subtitle": "spy.hurt.death"
+  },
+  "spy_hurt_fall": {
+    "catagory": "players",
+    "sounds": [
+      "any1_of_us:spy/fall/pl_fallpain1",
+      "any1_of_us:spy/fall/pl_fallpain2",
+      "any1_of_us:spy/fall/pl_fallpain3",
+      "any1_of_us:spy/fall/pl_fallpain4",
+      "any1_of_us:spy/fall/pl_fallpain5"
+    ],
+    "subtitle": "spy.hurt.fall"
   }
 
 }

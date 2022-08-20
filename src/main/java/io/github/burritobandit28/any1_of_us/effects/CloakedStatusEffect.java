@@ -7,7 +7,7 @@ import net.minecraft.util.registry.Registry;
 
 public class CloakedStatusEffect {
 
-	public static final StatusEffect CLOAKED = new FunkyThingBecauseStatusEffectIsWeird(StatusEffectType.BENEFICIAL, 0000000);
+	public static final StatusEffect CLOAKED = new FunkyThingBecauseStatusEffectIsWeird(StatusEffectType.BENEFICIAL, 0);
 
 	public static void register() {
 		Registry.register(Registry.STATUS_EFFECT, AnyoneOfUs.ID("cloaked"), CLOAKED);

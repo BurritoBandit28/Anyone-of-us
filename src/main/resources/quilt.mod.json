@@ -3,7 +3,7 @@
 	"quilt_loader": {
 		"group": "io.github.burritobandit28",
 		"id": "any1_of_us",
-		"version": "${version}",
+		"version": "0.1.0",
 		"metadata": {
 			"name": "Any one of use",
 			"description": "my submission for the Modfest: Singularity competition",

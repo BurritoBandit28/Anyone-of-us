@@ -14,6 +14,7 @@ import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.entity.effect.StatusEffect;
 import net.minecraft.entity.effect.StatusEffectInstance;
+import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.network.PacketByteBuf;
@@ -53,9 +54,10 @@ public abstract class LivingEntityMixin extends Entity {
 	public abstract void setHealth(float health);
 
 
-	@Inject(at = @At("TAIL"), method = "updatePotionVisibility")
+	@Inject(at = @At("RETURN"), method = "updatePotionVisibility")
 	public void cloakingInvis(CallbackInfo ci) {
 		this.setInvisible(this.hasStatusEffect(CloakedStatusEffect.CLOAKED));
+		this.setInvisible(this.hasStatusEffect(StatusEffects.INVISIBILITY));
 		if ((LivingEntity)(Object)this instanceof PlayerEntity) {
 
 			PlayerEntity user = (PlayerEntity) (LivingEntity)(Object)this;
@@ -90,8 +92,6 @@ public abstract class LivingEntityMixin extends Entity {
 				if (knifeItem.isBackStab()) {
 
 					amount = 300;
-
-					System.out.println("hello");
 
 					float h = this.getHealth();
 					this.setHealth(h - amount);

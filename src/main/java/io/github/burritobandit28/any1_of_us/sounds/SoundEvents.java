@@ -14,6 +14,7 @@ public class SoundEvents {
 	public static SoundEvent SPY_HURT_CRIT;
 	public static SoundEvent SPY_HURT_DEATH;
 	public static SoundEvent SPY_HURT_FIRE;
+	public static SoundEvent SPY_HURT_FALL;
 
 	public static void registerSoundEvents() {
 
@@ -24,6 +25,7 @@ public class SoundEvents {
 		SPY_HURT_CRIT = register("spy_hurt_crit");
 		SPY_HURT_DEATH = register("spy_hurt_death");
 		SPY_HURT_FIRE = register("spy_hurt_fire");
+		SPY_HURT_FALL = register("spy_hurt_fall");
 
 	}
 

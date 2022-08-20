@@ -10,7 +10,9 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.network.PacketByteBuf;
+import net.minecraft.network.packet.c2s.play.PlayerInputC2SPacket;
 import net.minecraft.server.network.ServerPlayerEntity;
+import net.minecraft.server.network.ServerPlayerInteractionManager;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.util.Hand;
 import net.minecraft.util.TypedActionResult;
@@ -114,8 +116,6 @@ public class CloakingDeviceItem extends Item {
 			}
 			ServerPlayNetworking.send((ServerPlayerEntity) user, AnyoneOfUs.ID("cloaked_packet"), buf);
 		}
-
-
 			 */
 
 		return TypedActionResult.consume(itemStack);

@@ -1,6 +1,9 @@
 package io.github.burritobandit28.any1_of_us;
 
 import io.github.burritobandit28.any1_of_us.items.CloakingDeviceItem;
+import io.github.burritobandit28.any1_of_us.items.KnifeItem;
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.item.ItemStack;
 import org.quiltmc.loader.api.ModContainer;
 import org.quiltmc.qsl.base.api.entrypoint.client.ClientModInitializer;
 import org.quiltmc.qsl.networking.api.client.ClientPlayNetworking;
@@ -37,6 +40,20 @@ public class AnyoneOfUsClient implements ClientModInitializer {
 			if (!worked) {
 				isCloaked.add(obj);
 			}
+
+		}));
+
+		ClientPlayNetworking.registerGlobalReceiver(AnyoneOfUs.ID("backstab_packet_client"), ((client, handler, buf, responseSender) -> {
+
+			boolean backstab = buf.readBoolean();
+			PlayerEntity player;
+
+
+				player = client.getServer().getPlayerManager().getPlayer(buf.readString());
+
+			ItemStack stack = player.getMainHandStack();
+			KnifeItem item = (KnifeItem) stack.getItem();
+			item.setBackStab(backstab, stack);
 
 		}));
 	}

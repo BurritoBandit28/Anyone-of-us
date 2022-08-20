@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "any1_of_us:item/blu_shoe"
+  }
+}
