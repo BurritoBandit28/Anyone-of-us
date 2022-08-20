@@ -20,5 +20,6 @@
   "spy.hurt.crit" : "A Spy is badly hurt",
   "spy.hurt.death" : "A Spy passes away (RIP)",
   "spy.hurt.fall" : "A Spy breaks his f***ing legs",
-  "attributes.name.generic.french" : "French-iness (out of 100)"
+  "attribute.name.generic.french" : "French-iness (out of 100)",
+  "suit.tooltip" : "A custom tailored Louis Crabbermaché suit,\nis valued at $10,000"
 }
