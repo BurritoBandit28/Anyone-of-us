@@ -3,10 +3,10 @@
 	"quilt_loader": {
 		"group": "io.github.burritobandit28",
 		"id": "any1_of_us",
-		"version": "0.1.0",
+		"version": "0.1.1",
 		"metadata": {
 			"name": "Any one of us",
-			"description": "my submission for the Modfest: Singularity competition",
+			"description": "This mod adds (some) of the features of the spy from Team Fortress 2.\n\nThe Knife:\nBecome a dime-a-dozen backstabbing scumbag with the Spy’s iconic butterfly knife. Use it to deal a hefty amount of damage to other mercenaries without them knowing you’re there.\n\nThe Invisiwatch:\nUse this device to turn yourself entirely invisible, unlike normal invisibility your items and armor become invisible.\n\nThe Spy’s suit:\nWear the spy’s suit to adopt his sounds from Team Fortress 2.\n\nTODO:\nIn the future I aim to add disguising and the electro sapper",
 			"contributors": {
 				"BurritoBandit28": "Developer"
 			},
