@@ -12,7 +12,8 @@
 			},
 			"contact": {
 				"issues": "https://github.com/BurritoBandit28/anyone-of-us/issues",
-				"sources": "https://github.com/BurritoBandit28/anyone-of-us"
+				"sources": "https://github.com/BurritoBandit28/anyone-of-us",
+				"homepage": "https://modrinth.com/mod/any1_of_us"
 			},
 			"icon": "assets/any1_of_us/icon.png"
 		},
