@@ -3,6 +3,7 @@ package io.github.burritobandit28.any1_of_us.mixins;
 import io.github.burritobandit28.any1_of_us.AnyoneOfUs;
 import io.github.burritobandit28.any1_of_us.effects.CloakedStatusEffect;
 import io.github.burritobandit28.any1_of_us.items.KnifeItem;
+import net.fabricmc.api.Environment;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.entity.*;
 import net.minecraft.entity.player.PlayerEntity;
@@ -21,6 +22,7 @@ import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
+
 
 @Mixin(PlayerEntity.class)
 public abstract class PlayerEntityMixinClient extends LivingEntity {
