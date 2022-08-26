@@ -19,10 +19,10 @@ import org.quiltmc.qsl.item.group.api.QuiltItemGroup;
 import org.quiltmc.qsl.networking.api.PacketByteBufs;
 import org.quiltmc.qsl.networking.api.PlayerLookup;
 import org.quiltmc.qsl.networking.api.ServerPlayNetworking;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.ArrayList;
-import java.util.logging.Logger;
-
 public class AnyoneOfUs implements ModInitializer {
 
 	public static ArrayList<String> shouldBeInvis = new ArrayList<>();
@@ -33,7 +33,7 @@ public class AnyoneOfUs implements ModInitializer {
 		return new Identifier(MOD_ID, name);
 	}
 
-	public static final Logger LOGGER = Logger.getLogger(MOD_ID);
+	public static final Logger LOGGER = LoggerFactory.getLogger("Any One Of Us");
 
 	public static final QuiltItemGroup FRENCH_TAB = QuiltItemGroup.builder(ID("frenchtab"))
 			.icon(() -> new ItemStack(ModItems.KNIFE))
@@ -77,7 +77,7 @@ public class AnyoneOfUs implements ModInitializer {
 			boolean backstab = buf.readBoolean();
 			PlayerEntity player = server.getPlayerManager().getPlayer(buf.readString());
 
-			if (player == null) {
+			if (player != null) {
 				ItemStack stack = player.getMainHandStack();
 				if (stack.getItem() instanceof KnifeItem knifeItem) {
 					knifeItem.setBackStab(backstab, stack);
