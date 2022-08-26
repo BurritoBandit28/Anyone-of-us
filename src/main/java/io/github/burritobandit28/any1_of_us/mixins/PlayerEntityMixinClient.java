@@ -53,12 +53,14 @@ public abstract class PlayerEntityMixinClient extends LivingEntity {
 		if (hit.getType() == HitResult.Type.ENTITY && hit.getType() != null && stack.getItem() instanceof KnifeItem bob) {
 			EntityHitResult entityHit = (EntityHitResult) hit;
 			Entity entity = entityHit.getEntity();
+
 			PacketByteBuf buf = PacketByteBufs.create();
 			boolean backstab = AnyoneOfUs.isStabable(this, entity);
 			buf.writeBoolean(backstab);
 			buf.writeString(this.getEntityName());
 			ClientPlayNetworking.send(AnyoneOfUs.ID("backstab_packet"), buf);
 			bob.setBackStab(backstab, stack);
+
 
 			/*
 			if (AnyoneOfUs.isStabable(entity.getYaw(), this.getYaw()) && this.getStackInHand(this.getActiveHand()).getItem() instanceof KnifeItem) {

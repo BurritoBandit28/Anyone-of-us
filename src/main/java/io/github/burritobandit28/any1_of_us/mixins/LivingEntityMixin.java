@@ -56,14 +56,8 @@ public abstract class LivingEntityMixin extends Entity {
 
 	@Inject(at = @At("TAIL"), method = "updatePotionVisibility", cancellable = true)
 	public void cloakingInvis(CallbackInfo ci) {
-		if (this.hasStatusEffect(CloakedStatusEffect.CLOAKED)) {
+		if (this.hasStatusEffect(CloakedStatusEffect.CLOAKED) || this.hasStatusEffect(StatusEffects.INVISIBILITY)) {
 			this.setInvisible(true);
-		}
-		else if (this.hasStatusEffect(StatusEffects.INVISIBILITY)) {
-			this.setInvisible(true);
-		}
-		else {
-			this.setInvisible(false);
 		}
 		if ((LivingEntity)(Object)this instanceof PlayerEntity) {
 

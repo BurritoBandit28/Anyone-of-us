@@ -77,18 +77,19 @@ public class AnyoneOfUs implements ModInitializer {
 			boolean backstab = buf.readBoolean();
 			PlayerEntity player = server.getPlayerManager().getPlayer(buf.readString());
 
-			assert player != null;
-			ItemStack stack = player.getMainHandStack();
-			if (stack.getItem() instanceof KnifeItem knifeItem) {
-				knifeItem.setBackStab(backstab, stack);
-				if (serverPlayerEntity == player) {
-					PacketByteBuf buf2 = PacketByteBufs.create();
+			if (player == null) {
+				ItemStack stack = player.getMainHandStack();
+				if (stack.getItem() instanceof KnifeItem knifeItem) {
+					knifeItem.setBackStab(backstab, stack);
+					if (serverPlayerEntity == player) {
+						PacketByteBuf buf2 = PacketByteBufs.create();
 
-					buf2.writeBoolean(backstab);
-					buf2.writeString(player.getEntityName());
+						buf2.writeBoolean(backstab);
+						buf2.writeString(player.getEntityName());
 
-					for (ServerPlayerEntity ignored : PlayerLookup.all(player.getServer())) {
-						ServerPlayNetworking.send((ServerPlayerEntity) player, AnyoneOfUs.ID("backstab_packet_client"), buf2);
+						for (ServerPlayerEntity ignored : PlayerLookup.all(player.getServer())) {
+							ServerPlayNetworking.send((ServerPlayerEntity) player, AnyoneOfUs.ID("backstab_packet_client"), buf2);
+						}
 					}
 				}
 			}
