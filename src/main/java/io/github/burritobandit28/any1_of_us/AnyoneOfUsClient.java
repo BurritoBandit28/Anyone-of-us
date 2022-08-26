@@ -49,7 +49,12 @@ public class AnyoneOfUsClient implements ClientModInitializer {
 			PlayerEntity player;
 
 
-			player = client.getServer().getPlayerManager().getPlayer(buf.readString());
+			if (client.getServer() != null) {
+				player = client.getServer().getPlayerManager().getPlayer(buf.readString());
+			}
+			else {
+				player = client.player;
+			}
 
 			ItemStack stack = player.getMainHandStack();
 			KnifeItem item = (KnifeItem) stack.getItem();
