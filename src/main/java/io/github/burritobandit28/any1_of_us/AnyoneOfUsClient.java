@@ -55,10 +55,10 @@ public class AnyoneOfUsClient implements ClientModInitializer {
 			else {
 				player = client.player;
 			}
-
 			ItemStack stack = player.getMainHandStack();
-			KnifeItem item = (KnifeItem) stack.getItem();
-			item.setBackStab(backstab, stack);
+			if (stack.getItem() instanceof KnifeItem knifeItem) {
+				knifeItem.setBackStab(backstab, stack);
+			}
 
 		}));
 	}

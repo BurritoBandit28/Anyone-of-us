@@ -54,7 +54,7 @@ public abstract class LivingEntityMixin extends Entity {
 	public abstract void setHealth(float health);
 
 
-	@Inject(at = @At("TAIL"), method = "updatePotionVisibility", cancellable = true)
+	@Inject(at = @At("TAIL"), method = "updatePotionVisibility")
 	public void cloakingInvis(CallbackInfo ci) {
 		if (this.hasStatusEffect(CloakedStatusEffect.CLOAKED) || this.hasStatusEffect(StatusEffects.INVISIBILITY)) {
 			this.setInvisible(true);
@@ -72,7 +72,6 @@ public abstract class LivingEntityMixin extends Entity {
 				ServerPlayNetworking.send(player, AnyoneOfUs.ID("cloaked_packet"), buf);
 			}
 			ServerPlayNetworking.send( (ServerPlayerEntity) user, AnyoneOfUs.ID("cloaked_packet"), buf);
-			ci.cancel();
 		}
 	}
 
