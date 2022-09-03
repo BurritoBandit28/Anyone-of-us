@@ -9,6 +9,7 @@
   ],
   "client": [
     "ArmorFeatureRendererMixin",
+    "ElytraFeatureRendererMixin",
     "PlayerEntityMixinClient",
     "PlayerEntityRendererMixin",
     "PlayerHeldItemFeatureRendererMixin"
